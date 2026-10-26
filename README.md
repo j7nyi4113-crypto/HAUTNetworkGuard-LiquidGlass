@@ -157,6 +157,22 @@ Windows 端基于 C++ 与 Qt 6 Widgets 实现，功能完整、长期维护。
 
 ---
 
+## 界面一览
+
+<p align="center">
+  <img src="preview/02-status-online.webp" width="49%" alt="已连接">
+  <img src="preview/03-account.webp" width="49%" alt="账号与运行选项">
+</p>
+<p align="center">
+  <img src="preview/05-dark.webp" width="49%" alt="深色模式">
+  <img src="preview/04-settings.webp" width="49%" alt="检测间隔与外观">
+</p>
+<p align="center">
+  <img src="preview/06-wide.webp" width="100%" alt="宽屏双栏布局">
+</p>
+
+---
+
 ## 目录结构
 
 ```
