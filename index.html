@@ -833,7 +833,7 @@ svg{display:block}
           设置
         </button>
         <div class="side-foot">
-          关闭窗口后仍驻留系统托盘<br>版本 v1.4.0 · Liquid Glass
+          关闭窗口后仍驻留系统托盘<br>版本 v1.3.17 · Liquid Glass
         </div>
       </aside>
 
@@ -991,7 +991,7 @@ svg{display:block}
                 <div class="row-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-.7 4.5"/><path d="M20 5.5V11h-5.5"/></svg></div>
                 <div class="row-main">
                   <div class="row-title">检查更新</div>
-                  <div class="row-sub">当前版本 v1.4.0</div>
+                  <div class="row-sub">当前版本 v1.3.17</div>
                 </div>
                 <span class="row-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
               </div>
@@ -1084,15 +1084,15 @@ svg{display:block}
       </div>
       <div class="modal-body">
         <div class="ver-row">
-          <div class="ver-box"><div class="v-l">当前版本</div><div class="v-n">1.4.0</div></div>
-          <div class="ver-box new"><div class="v-l">最新版本</div><div class="v-n">1.5.2</div></div>
+          <div class="ver-box"><div class="v-l">当前版本</div><div class="v-n">1.3.17</div></div>
+          <div class="ver-box new"><div class="v-l">最新版本</div><div class="v-n">1.4.0</div></div>
         </div>
-        <div class="changelog">v1.5.2
+        <div class="changelog">v1.4.0
 · 全新液态玻璃界面，视觉层级更清晰
 · 概览页新增实时流量与在线时长统计
 · 优化断线重连策略，恢复更迅速
 
-v1.5.0
+v1.3.18
 · 新增检测间隔自定义（30–300 秒）
 · 支持深色外观，跟随系统自动切换
 · 修复部分场景下托盘图标状态不同步</div>
@@ -1380,7 +1380,7 @@ $('#rowUpdate').addEventListener('click',()=>$('#modalRoot').classList.add('show
 function closeModal(){$('#modalRoot').classList.remove('show');}
 $('#modalScrim').addEventListener('click',closeModal);
 $('#modalLater').addEventListener('click',()=>{closeModal();toast('已选择稍后更新','可在设置中随时检查更新','info');});
-$('#modalNow').addEventListener('click',()=>{closeModal();toast('开始更新','正在下载 v1.5.2 …','ok');addLog('开始下载更新 v1.5.2','info');});
+$('#modalNow').addEventListener('click',()=>{closeModal();toast('开始更新','正在下载 v1.4.0 …','ok');addLog('开始下载更新 v1.4.0','info');});
 
 /* demo buttons */
 $('#btnDrop').addEventListener('click',()=>{
