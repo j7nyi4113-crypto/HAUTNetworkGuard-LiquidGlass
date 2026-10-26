@@ -11,6 +11,8 @@ A Liquid Glass UI redesign prototype for [HAUTNetworkGuard](https://github.com/y
 ![Build](https://img.shields.io/badge/build-none-brightgreen)
 ![Deps](https://img.shields.io/badge/dependencies-0-lightgrey)
 
+**[🔗 在线演示](https://j7nyi4113-crypto.github.io/HAUTNetworkGuard-LiquidGlass/)** · **[原项目](https://github.com/yellowpeachxgp/HAUTNetworkGuard)**
+
 </div>
 
 ![界面总览](preview/overview.webp)
