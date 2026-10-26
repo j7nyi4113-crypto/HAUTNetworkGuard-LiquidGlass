@@ -2,57 +2,56 @@
 
 # HAUT Network Guard · Liquid Glass
 
-**河南工业大学校园网自动登录工具 —— 液态玻璃界面重设计**
+**河南工业大学校园网自动登录工具 —— 液态玻璃版本**
 
-A Liquid Glass UI redesign for [HAUTNetworkGuard](https://github.com/yellowpeachxgp/HAUTNetworkGuard).
+界面就是程序本身。不是网页，不是浏览器套壳，是一个双击就能用的 Windows 桌面程序。
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Type](https://img.shields.io/badge/type-UI%20prototype-8b5cf6)
-![Build](https://img.shields.io/badge/build-none-brightgreen)
-![Deps](https://img.shields.io/badge/dependencies-0-lightgrey)
+![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-0078D4)
+![Size](https://img.shields.io/badge/download-390%20KB-2ea44f)
+![Runtime](https://img.shields.io/badge/.NET%20install-not%20required-lightgrey)
 
-**[🔗 在线演示](https://j7nyi4113-crypto.github.io/HAUTNetworkGuard-LiquidGlass/)** · **[⬇️ 所有版本](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases)** · **[原项目](https://github.com/yellowpeachxgp/HAUTNetworkGuard)**
+**[⬇️ 下载程序](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/latest)** · **[🔗 网页预览](https://j7nyi4113-crypto.github.io/HAUTNetworkGuard-LiquidGlass/)** · **[原项目](https://github.com/yellowpeachxgp/HAUTNetworkGuard)**
 
 </div>
 
-![界面总览](preview/overview.webp)
+<p align="center">
+  <img src="preview/app-01-status.webp" width="380" alt="程序主界面">
+</p>
 
 ---
 
 ## 下载：先看你在哪种情况
 
-| 你的情况 | 下载 | 包里有什么 |
+| 你的情况 | 下载 | 里面是什么 |
 | :--- | :--- | :--- |
-| **已经有原版程序** | [**界面包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.3.17/HAUTNetworkGuard-LiquidGlass-UI-v1.3.17.zip)<br>`20KB` | 只有液态玻璃界面，解压双击 `index.html` |
-| **什么都没有** | [**完整包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.3.17/HAUTNetworkGuard-LiquidGlass-Full-v1.3.17.zip)<br>`37MB` | 能用的程序 + 液态玻璃界面 + 启动脚本 |
+| **想直接能用** | [**程序包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.4.0/HAUTNetworkGuard-LiquidGlass-v1.4.0.zip)<br>`390KB` | 双击就跑的 Windows 程序，界面就是液态玻璃 |
+| **只想要界面文件** | [**界面包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.4.0/HAUTNetworkGuard-UI-v1.4.0.zip)<br>`20KB` | `index.html` + 截图，浏览器里打开看效果 |
 
-> [!IMPORTANT]
-> 完整包里有**两个东西**，别混淆：
->
-> - `HAUTNetworkGuard\HAUTNetworkGuard.exe` —— 原版程序，**能真正登录校园网**，用的是原版界面
-> - `LiquidGlass\` + `Launch-LiquidGlass.bat` —— **新的液态玻璃界面**，目前是独立原型
->
-> 想联网，用前者；想看新界面，用后者。
+程序包解压后双击 `HAUTNetworkGuard.exe` 即可，**不需要安装 .NET 运行时**
+（基于系统自带的 .NET Framework 4.8），也不需要 Node、Python 或任何依赖。
 
-### 完整包里怎么用
+> [!NOTE]
+> 唯一的前置条件是 Microsoft Edge WebView2 Runtime。Windows 11 和较新的 Windows 10
+> 默认已自带；万一提示缺失，[点这里装一次](https://developer.microsoft.com/microsoft-edge/webview2/)就好。
 
-解压后你会看到：
+---
 
-```
-HAUTNetworkGuard-LiquidGlass-Full-v1.3.17\
-├── HAUTNetworkGuard\        原版程序 v1.3.17（Qt6 运行库已打包，离线可跑）
-├── LiquidGlass\             液态玻璃界面
-├── Launch-LiquidGlass.bat   以独立窗口打开界面，看起来像桌面程序
-└── 使用说明.txt
-```
+## 它和之前那个「浏览器演示」的区别
 
-- **要真正登录校园网** → 运行 `HAUTNetworkGuard\HAUTNetworkGuard.exe`
-- **要看新版界面** → 双击 `Launch-LiquidGlass.bat`
+上一版是把界面做成 HTML，靠浏览器打开，`exe` 还是原版界面 —— 两者是分开的。
+这一版把界面真正放进了程序窗口：
 
-启动脚本会自动找 Edge 或 Chrome，用 `--app` 模式开一个没有地址栏的独立窗口；
-两个浏览器都没有时，退回默认浏览器打开。
+|  | 上一版 | 这一版 |
+| :--- | :--- | :--- |
+| 打开方式 | 浏览器标签页 / `--app` 模式 | 双击 `HAUTNetworkGuard.exe` |
+| 窗口 | 浏览器的窗口 | 无边框圆角窗口，界面即窗口 |
+| 登录 | 模拟，不联网 | **真实登录**，走校园网网关 |
+| 体积 | 20 KB（只有界面） | 390 KB（完整程序） |
 
-> 如果程序报缺少 VC++ 运行库，双击 `HAUTNetworkGuard\vc_redist.x64.exe` 装一次即可。
+具体做法：**.NET Framework 4.8 + WinForms 承载 WebView2**，界面是 HTML，
+但渲染在程序自己的窗口里，通过 `postMessage` 与 C# 后端双向通信；
+登录协议用 C# 重写，直接对接校园网网关。
 
 ---
 
@@ -60,51 +59,42 @@ HAUTNetworkGuard-LiquidGlass-Full-v1.3.17\
 
 本项目是 [**yellowpeachxgp/HAUTNetworkGuard**](https://github.com/yellowpeachxgp/HAUTNetworkGuard) 的**界面重设计分支**。
 
-原项目是一个成熟的跨平台校园网自动登录工具，支持 macOS、Windows、OpenWrt 与通用 Linux 四个平台，
-Windows 端基于 C++ 与 Qt 6 Widgets 实现，功能完整、长期维护。
-
-本项目**只重做界面层**，不涉及任何登录协议、网络逻辑或凭据处理。
+原项目是成熟的跨平台校园网自动登录工具（macOS / Windows / OpenWrt / Linux），
+Windows 端基于 C++ 与 Qt 6 Widgets。本项目保留其协议与产品逻辑，
+把 Windows 端的界面层替换为液态玻璃方案。
 
 ### 与原项目的关系
 
 | | 原项目 HAUTNetworkGuard | 本项目 |
 | :--- | :--- | :--- |
-| 定位 | 可直接使用的客户端 | 界面设计原型 |
-| 平台 | macOS / Windows / OpenWrt / Linux | 浏览器 |
-| 技术栈 | Swift / C++ Qt 6 / Lua | 单文件 HTML + CSS + 原生 JS |
-| 校园网协议 | SRUN3K | 不包含协议实现 |
-| 凭据存储 | Keychain / DPAPI / UCI | 不涉及 |
+| 定位 | 跨平台客户端 | Windows 端界面重设计版 |
+| 界面技术 | C++ / Qt 6 Widgets | C# / WinForms + WebView2 |
+| 协议 | SRUN3K | SRUN3K（移植自原项目） |
 | 许可 | MIT | MIT（继承） |
 
 原项目作者 **YellowPeach** · QQ 群 `789860526`
 
-### 为什么界面还没做进 exe 里
-
-原版程序是编译好的 Qt 程序，界面写死在二进制里。要替换界面，需要拿到源码重新编译，
-并且用 Qt 重做整套玻璃效果——`backdrop-filter` 这类能力在 QWidget 里没有等价物，
-需要自绘或者用 QML + ShaderEffect 实现。
-
-所以目前的形态是：**界面原型先跑通视觉方案，再谈落地**。
-这个仓库交付的是第一步——一套可以直接看、可以直接点的高保真原型。
+> 校园网协议的实现（加密、请求构造、响应解析）逐条移植自原项目的
+> `Windows/src/api.cpp` 与 `protocol_utils.cpp`，并做过逐字节比对校验。
 
 ---
 
 ## 设计目标
 
-第一版原型做出来后问题很集中——**过于"AI 化"，且玻璃是假的**。第二版针对这两点重做。
+第一版原型做出来后问题很集中——**过于"AI 化"，且玻璃是假的**。重做时针对这几点。
 
 | 问题 | 具体表现 | 处理方式 |
 | :--- | :--- | :--- |
-| 视觉噪音过多 | 窗口内叠了一层彩色极光光斑、高饱和彩虹壁纸、大色块发光圆球、彩色图标底、厚重渐变阴影 | 全部移除。改为中性冷底 + 三道低饱和色雾，全站单一强调色 `#0a84ff` |
+| 视觉噪音过多 | 窗口内叠了彩色极光光斑、高饱和彩虹壁纸、大色块发光圆球、彩色图标底、厚重渐变阴影 | 全部移除。改为中性冷底 + 三道低饱和色雾，全站单一强调色 `#0a84ff` |
 | 玻璃不透明 | 面板用 `rgba(255,255,255,.55)`，几乎看不到背景，只有模糊没有折射 | 填充降到 `0.11 ~ 0.20`，叠加三层结构（见下节） |
 | 没有磨砂质感 | 纯色半透明，缺少颗粒 | 加 `feTurbulence` 生成的细颗粒，融入玻璃 |
-| 没有流动感 | 全静态 | 桌面色雾缓慢漂移 + 各玻璃面镜面高光扫过 |
+| 没有流动感 | 全静态 | 色雾缓慢漂移 + 各玻璃面镜面高光扫过 |
 
 ---
 
 ## 液态玻璃是怎么做的
 
-核心是把一块玻璃拆成**三层**，各司其职：
+核心是把一块玻璃拆成**三层**：
 
 ```
 ① 本体       极低不透明度着色 + backdrop-filter 模糊 + 磨砂颗粒
@@ -114,8 +104,8 @@ Windows 端基于 C++ 与 Qt 6 Widgets 实现，功能完整、长期维护。
 
 ### ② 边缘折射：让光在玻璃边上弯一下
 
-这是"液态玻璃"最关键的一笔。用 `mask-composite: exclude` 把伪元素裁成一条环带，
-再对环带单独做一次 `backdrop-filter`（`saturate(230%) brightness(1.18) contrast(1.08)`）：
+用 `mask-composite: exclude` 把伪元素裁成一条环带，再对环带单独做一次
+`backdrop-filter`（`saturate(230%) brightness(1.18) contrast(1.08)`）：
 
 ```css
 .card::before {
@@ -132,10 +122,10 @@ Windows 端基于 C++ 与 Qt 6 Widgets 实现，功能完整、长期维护。
 
 ### 真·折射：`backdrop-filter: url(#svg-filter)`
 
-只做亮度提升只是"像"玻璃。真正的折射需要让背景内容在边缘被**弯折**。
+只做亮度提升只是"像"玻璃。真正的折射要让背景内容在边缘被**弯折**。
 
-关键点在于：`::before` 元素本身是 `inset: 0` 的**全尺寸**元素，只是被 `mask` 裁成了环带。
-所以它的滤镜区域覆盖整个窗口，`feDisplacementMap` 有完整的背景可以采样——
+关键在于：`::before` 元素本身是 `inset: 0` 的**全尺寸**元素，只是被 `mask` 裁成了环带。
+所以它的滤镜区域覆盖整个窗口，`feDisplacementMap` 有完整的背景可以采样 ——
 这一点决定了位移滤镜在窄环带上依然能生效。
 
 ```html
@@ -153,15 +143,13 @@ Windows 端基于 C++ 与 Qt 6 Widgets 实现，功能完整、长期维护。
 }
 ```
 
-窗口内还叠了一层 14px 宽的 `.lens-band`，用更弱的位移量做出"由边缘向内衰减"的镜片感。
-
 > 实测：开启 / 关闭该滤镜渲染同一帧，约 **6% 的像素差异超过 6 级、峰值 68 级**。
 
 ### ③ 流动感
 
 两处叠加，都很慢：
 
-- **桌面色雾**每 34 / 40 / 46 秒漂移一轮，透过半透明玻璃可见 → 玻璃"活"的
+- **色雾**每 34 / 40 / 46 秒漂移一轮，透过半透明玻璃可见 → 玻璃是"活"的
 - **镜面高光**每块玻璃面独立扫过，用 `--sweep-delay` 错开相位，避免整齐划一
 
 ```css
@@ -177,92 +165,92 @@ Windows 端基于 C++ 与 Qt 6 Widgets 实现，功能完整、长期维护。
 
 ## 功能
 
-原型完整实现了原版 Windows 客户端的交互流程，可点击操作：
-
-- **三个视图**：概览 / 账号 / 设置，底部胶囊导航（窄屏）↔ 左侧边栏（宽屏）
-- **状态机**：`offline` / `checking` / `online` / `error`，含自动登录、断线重连、手动离线保持
-- **登录 / 注销**：模拟请求延迟，成功后填充 IP、实时刷新流量与在线时长
-- **运行选项**：记住密码、开机自启、自动登录（联动底部提示文案）
-- **检测间隔**：30 – 300 秒，步进器 + 滑块双向同步
-- **外观**：浅色 / 深色 / 跟随系统，托盘与弹窗同步切换
-- **系统托盘**：最小化动画、托盘图标、右键菜单
-- **其他**：更新弹窗（版本对比 + 更新日志）、Toast 提示、活动记录、右下角拖拽缩放
-
-### 响应式
-
-用 **容器查询**（`container-type: inline-size`）而非媒体查询——窗口是桌面应用，
-用户拖拽改变的是窗口宽度，不是视口宽度。宽度超过 720px 自动切为双栏布局。
+- **真实登录 / 注销**：对接校园网网关（SRUN3K），不是模拟
+- **状态监测**：默认 30 秒轮询，可调 30 – 300 秒，掉线自动重连
+- **三个视图**：概览 / 账号 / 设置，底部胶囊导航（窄）↔ 左侧边栏（宽）
+- **实时读数**：IP、已用流量、在线时长，服务端数据 + 本地按秒插值
+- **运行选项**：记住密码、开机自启、自动登录
+- **外观**：浅色 / 深色 / 跟随系统
+- **系统托盘**：关闭窗口缩到托盘继续守着，右键菜单可检测 / 登录 / 退出
+- **窗口**：无边框圆角、拖拽移动、右下角拖拽缩放、可置顶
+- **凭据安全**：密码用 Windows DPAPI 加密，绑定当前用户
 
 ---
 
 ## 界面一览
 
 <p align="center">
-  <img src="preview/02-status-online.webp" width="49%" alt="已连接">
-  <img src="preview/03-account.webp" width="49%" alt="账号与运行选项">
+  <img src="preview/app-01-status.webp" width="32%" alt="概览">
+  <img src="preview/app-02-account.webp" width="32%" alt="账号">
+  <img src="preview/app-03-settings.webp" width="32%" alt="设置">
 </p>
+
+深色模式、宽屏双栏、托盘菜单、更新弹窗：
+
 <p align="center">
   <img src="preview/05-dark.webp" width="49%" alt="深色模式">
-  <img src="preview/04-settings.webp" width="49%" alt="检测间隔与外观">
+  <img src="preview/06-wide.webp" width="49%" alt="宽屏双栏">
 </p>
 <p align="center">
-  <img src="preview/06-wide.webp" width="100%" alt="宽屏双栏布局">
+  <img src="preview/07-tray.webp" width="49%" alt="系统托盘">
+  <img src="preview/08-update-modal.webp" width="49%" alt="更新弹窗">
 </p>
 
 ---
 
-## 目录结构
+## 从源码构建
 
-```
-.
-├── index.html              # 全部内容：HTML + CSS + JS，单文件
-├── preview/                # 界面截图（WebP）
-│   ├── 01-status-offline.webp
-│   ├── 02-status-online.webp
-│   ├── 03-account.webp
-│   ├── 04-settings.webp
-│   ├── 05-dark.webp
-│   ├── 06-wide.webp
-│   ├── 07-tray.webp
-│   ├── 08-update-modal.webp
-│   └── overview.webp
-├── LICENSE
-└── README.md
-```
-
-> 仓库里只有界面源码。完整包里的原版程序不在此仓库，见 [Releases](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases)。
-
----
-
-## 本地运行
-
-没有任何构建步骤，也不需要装依赖：
+需要 [.NET SDK 8](https://dotnet.microsoft.com/download)（用于编译，运行不需要）。
 
 ```bash
 git clone https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass.git
 cd HAUTNetworkGuard-LiquidGlass
+dotnet build app/LiquidGlass.csproj -c Release
 ```
 
-双击 `index.html`，或者起个本地服务：
+产物在 `app/bin/Release/net48/`，整个目录拷走即可运行。
+
+项目结构：
+
+```
+app/
+├── LiquidGlass.csproj      # net48 + WebView2
+├── Program.cs              # 入口、单实例、--selftest
+├── MainForm.cs             # 无边框窗口、WebView2、托盘、轮询
+├── SrunClient.cs           # SRUN3K 协议
+└── AppConfig.cs            # 配置 + DPAPI
+index.html                  # 界面（构建时复制进 wwwroot，同一份文件）
+```
+
+`index.html` 只有一份：构建时复制到 `wwwroot`，浏览器里打开则退化为纯前端演示。
+
+### 自检
 
 ```bash
-python -m http.server 8000
-# 打开 http://localhost:8000
+HAUTNetworkGuard.exe --selftest
 ```
 
-> 建议用 Chromium 内核浏览器（Chrome / Edge）查看，液态玻璃的折射效果依赖
-> `backdrop-filter` 与 `mask-composite`。
+离屏加载界面、跑一遍协议校验、把三个视图截到 `%TEMP%`，不弹窗不抢焦点。
+结果写在 `%TEMP%\haut-selftest.txt`。
 
 ---
 
 ## 已知限制
 
-- **界面原型不能登录**：所有网络请求都是模拟的，不连接真实网关，也不存储任何凭据。
-- **浏览器兼容性**：`backdrop-filter: url()` 目前仅 Chromium 系支持。Firefox / Safari
-  会退化为纯亮边（不影响整体观感），其余部分正常。
-- **性能**：主玻璃面叠加了全尺寸 SVG 位移滤镜，低端设备上可能掉帧。
-  代码里已针对 `prefers-reduced-motion` 关闭全部动画。
-- **界面尚未进入程序**：原版 exe 仍是原版界面，替换需要源码重建，见上文说明。
+- **仅适用于河南工业大学校园网**：网关地址硬编码为 `172.16.154.130`，其他学校不通用。
+- **浏览器兼容性**：网页预览里 `backdrop-filter: url()` 目前仅 Chromium 系支持，
+  Firefox / Safari 会退化为纯亮边。程序内置 WebView2，不受影响。
+- **性能**：主玻璃面叠加了全尺寸 SVG 位移滤镜，低配设备上可能掉帧。
+  代码已针对 `prefers-reduced-motion` 关闭全部动画。
+- **未做代码签名**：首次运行 Windows SmartScreen 可能提示「未知发布者」，选「仍要运行」。
+
+---
+
+## 数据与隐私
+
+- 配置存在 `%APPDATA%\HAUTNetworkGuard\config.json`
+- 密码用 DPAPI 加密，绑定当前 Windows 用户，换用户或换机器都解不开
+- 程序不收集、不上传任何数据；除校园网网关外不连接任何服务器
 
 ---
 
@@ -274,4 +262,4 @@ python -m http.server 8000
 ## 许可证
 
 [MIT](LICENSE) —— 继承自原项目。原始版权归 YellowPeach 所有。
-完整包内的 Qt6 运行库遵循 LGPL v3。
+随包分发的 WebView2 SDK 遵循其自身许可。
