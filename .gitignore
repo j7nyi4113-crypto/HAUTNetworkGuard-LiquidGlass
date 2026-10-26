@@ -13,3 +13,7 @@ desktop.ini
 
 # Node (if you add a dev server later)
 node_modules/
+
+# .NET build output
+app/bin/
+app/obj/

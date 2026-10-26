@@ -751,6 +751,26 @@ svg{display:block}
   .grip{display:none}
 }
 
+/* ============================================================
+   原生窗口模式（WebView2）—— 界面本身就是程序窗口
+   ============================================================ */
+html.native .stage{padding:0}
+html.native .app-window{
+  width:100%;height:100%;min-width:0;min-height:0;
+  max-width:none;max-height:none;
+  border-radius:0;border:0;box-shadow:none;
+}
+html.native .grip{display:grid}
+/* 窗口即玻璃本身：降低自身模糊，否则色雾会被二次糊成一片白 */
+html.native .app-window{--g-blur:24px;--g-sat:195%}
+/* 色雾按窗口尺寸重新铺，保持左右平衡 */
+html.native .wallpaper{inset:-28%}
+html.native .wallpaper span{filter:blur(58px)}
+html.native .w1{width:105vw;height:105vw;left:-48vw;top:-46vw;opacity:.9}
+html.native .w2{width:95vw;height:95vw;right:-42vw;top:4vw;opacity:.8}
+html.native .w3{width:88vw;height:88vw;left:-14vw;bottom:-46vw;opacity:.62}
+html.native .titlebar{cursor:default}
+
 /* 尊重系统的减弱动效偏好 */
 @media (prefers-reduced-motion: reduce){
   .wallpaper span,
@@ -833,7 +853,7 @@ svg{display:block}
           设置
         </button>
         <div class="side-foot">
-          关闭窗口后仍驻留系统托盘<br>版本 v1.3.17 · Liquid Glass
+          关闭窗口后仍驻留系统托盘<br>版本 v<span id="appVer">1.4.0</span> · Liquid Glass
         </div>
       </aside>
 
@@ -991,7 +1011,7 @@ svg{display:block}
                 <div class="row-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-.7 4.5"/><path d="M20 5.5V11h-5.5"/></svg></div>
                 <div class="row-main">
                   <div class="row-title">检查更新</div>
-                  <div class="row-sub">当前版本 v1.3.17</div>
+                  <div class="row-sub">当前版本 v<span id="appVer2">1.4.0</span></div>
                 </div>
                 <span class="row-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
               </div>
@@ -1084,15 +1104,15 @@ svg{display:block}
       </div>
       <div class="modal-body">
         <div class="ver-row">
-          <div class="ver-box"><div class="v-l">当前版本</div><div class="v-n">1.3.17</div></div>
-          <div class="ver-box new"><div class="v-l">最新版本</div><div class="v-n">1.4.0</div></div>
+          <div class="ver-box"><div class="v-l">当前版本</div><div class="v-n">1.4.0</div></div>
+          <div class="ver-box new"><div class="v-l">最新版本</div><div class="v-n">1.5.0</div></div>
         </div>
-        <div class="changelog">v1.4.0
+        <div class="changelog">v1.5.0
 · 全新液态玻璃界面，视觉层级更清晰
 · 概览页新增实时流量与在线时长统计
 · 优化断线重连策略，恢复更迅速
 
-v1.3.18
+v1.4.0
 · 新增检测间隔自定义（30–300 秒）
 · 支持深色外观，跟随系统自动切换
 · 修复部分场景下托盘图标状态不同步</div>
@@ -1109,12 +1129,16 @@ v1.3.18
 (function(){
 "use strict";
 const $=(s,r=document)=>r.querySelector(s);
+/* 运行在原生窗口（WebView2）里时为 true；浏览器里打开则是纯前端演示 */
+const NATIVE=!!(window.chrome&&window.chrome.webview);
+if(NATIVE) document.documentElement.classList.add('native');
+function nativeSend(o){ try{ window.chrome.webview.postMessage(JSON.stringify(o)); }catch(e){} }
 const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 
 /* ---------------- state ---------------- */
 const S={
   view:'status', conn:'offline', busy:null, manualHold:false,
-  username:'2023123456', password:'', remember:true, autostart:false, autologin:true,
+  username:NATIVE?'':'2023123456', password:'', remember:true, autostart:false, autologin:true,
   interval:30, theme:'light', ip:'—', bytes:0, seconds:0, lastCheck:null,
   autoRetryAt:0, log:[], minimized:false, retryCooldown:60000
 };
@@ -1244,6 +1268,20 @@ function renderAll(){renderStatus();renderHint();renderInterval();}
 /* ---------------- actions ---------------- */
 function login(silent){
   if(S.busy) return;
+  if(NATIVE){
+    if(!silent){
+      const u=($('#inUser').value||'').trim(), p=$('#inPass').value;
+      if(!u||!p){
+        const needUser=!u;
+        switchView('account');
+        setTimeout(()=>{ shakeField(needUser?'#fieldUser':'#fieldPass'); (needUser?$('#inUser'):$('#inPass')).focus(); },280);
+        toast('请先填写账号', needUser?'学号不能为空':'密码不能为空','err');
+        return;
+      }
+    }
+    nativeSend({t:'login', user:($('#inUser').value||'').trim(), pass:$('#inPass').value});
+    return;
+  }
   if(silent && !S.password){ addLog('自动登录已跳过：未保存凭据','info'); return; }
   if(!silent){
     if(!S.username.trim() || !S.password){
@@ -1266,6 +1304,7 @@ function login(silent){
 }
 function logout(){
   if(S.busy) return;
+  if(NATIVE){ nativeSend({t:'logout'}); return; }
   S.busy='logout'; renderStatus();
   addLog('正在执行注销请求…','info');
   setTimeout(function(){
@@ -1277,6 +1316,7 @@ function logout(){
 }
 function check(manual){
   if(S.busy||S.conn==='checking') return;
+  if(NATIVE){ nativeSend({t:'check'}); return; }
   const prev=S.conn;
   S.conn='checking';renderStatus();
   setTimeout(function(){
@@ -1321,6 +1361,12 @@ $('#btnCheck').addEventListener('click',()=>check(true));
 $('#btnSave').addEventListener('click',()=>{
   S.username=$('#inUser').value.trim();
   S.password=$('#inPass').value;
+  if(NATIVE){
+    nativeSend({t:'save', user:S.username, pass:S.password,
+      remember:!!S.remember, autostart:!!S.autostart, autologin:!!S.autologin,
+      interval:S.interval, theme:S.theme});
+    return;
+  }
   addLog('设置已保存并立即生效','ok');
   toast('设置已保存','新的检测间隔与运行策略已生效','ok');
 });
@@ -1380,7 +1426,7 @@ $('#rowUpdate').addEventListener('click',()=>$('#modalRoot').classList.add('show
 function closeModal(){$('#modalRoot').classList.remove('show');}
 $('#modalScrim').addEventListener('click',closeModal);
 $('#modalLater').addEventListener('click',()=>{closeModal();toast('已选择稍后更新','可在设置中随时检查更新','info');});
-$('#modalNow').addEventListener('click',()=>{closeModal();toast('开始更新','正在下载 v1.4.0 …','ok');addLog('开始下载更新 v1.4.0','info');});
+$('#modalNow').addEventListener('click',()=>{closeModal();toast('开始更新','正在下载 v1.5.0 …','ok');addLog('开始下载更新 v1.5.0','info');});
 
 /* demo buttons */
 $('#btnDrop').addEventListener('click',()=>{
@@ -1419,10 +1465,11 @@ function restore(){
   $('#tray').classList.remove('show');
   $('#trayMenu').classList.remove('show');
 }
-$('#btnMin').addEventListener('click',minimize);
-$('#btnClose').addEventListener('click',minimize);
+$('#btnMin').addEventListener('click',()=>{ if(NATIVE){nativeSend({t:'win',a:'min'});return;} minimize(); });
+$('#btnClose').addEventListener('click',()=>{ if(NATIVE){nativeSend({t:'win',a:'close'});return;} minimize(); });
 $('#btnPin').addEventListener('click',()=>{
   const b=$('#btnPin'); b.classList.toggle('on');
+  if(NATIVE){ nativeSend({t:'pin', v:b.classList.contains('on')}); return; }
   toast(b.classList.contains('on')?'已置顶':'已取消置顶','', 'info');
 });
 $('#tray').addEventListener('click',(e)=>{
@@ -1442,6 +1489,10 @@ document.addEventListener('click',()=>$('#trayMenu').classList.remove('show'));
 /* ---------------- resize grip ---------------- */
 (function(){
   const grip=$('#grip'), win=$('#appWindow');
+  if(NATIVE){
+    grip.addEventListener('pointerdown',e=>{ e.preventDefault(); nativeSend({t:'win',a:'resize'}); });
+    return;
+  }
   let sx,sy,sw,sh,dragging=false;
   grip.addEventListener('pointerdown',e=>{
     e.preventDefault(); dragging=true;
@@ -1458,33 +1509,114 @@ document.addEventListener('click',()=>$('#trayMenu').classList.remove('show'));
   grip.addEventListener('pointerup',e=>{dragging=false;try{grip.releasePointerCapture(e.pointerId);}catch(_){}});
 })();
 
+/* ---------------- native bridge ---------------- */
+let baseBytes=0, baseSeconds=0, baseAt=0;
+
+function applyState(conn,ip,bytes,seconds){
+  S.conn=conn||'offline';
+  S.ip=ip||'—';
+  baseBytes=bytes||0; baseSeconds=seconds||0; baseAt=Date.now();
+  S.bytes=baseBytes; S.seconds=baseSeconds;
+  renderStatus();
+}
+
+function applyConfig(m){
+  S.username=m.user||'';
+  S.remember=!!m.remember;
+  S.autostart=!!m.autostart;
+  S.autologin=!!m.autologin;
+  S.interval=m.interval||30;
+  S.theme=m.theme||'light';
+
+  const iu=$('#inUser'), ip=$('#inPass');
+  if(iu) iu.value=S.username;
+  if(ip){ ip.value=''; ip.placeholder=m.hasPass?'已保存，留空则不修改':'请输入密码'; }
+
+  $('#swRemember').classList.toggle('on',S.remember);
+  $('#swAutostart').classList.toggle('on',S.autostart);
+  $('#swAutologin').classList.toggle('on',S.autologin);
+
+  if(m.version){
+    const v1=$('#appVer'), v2=$('#appVer2');
+    if(v1) v1.textContent=m.version;
+    if(v2) v2.textContent=m.version;
+  }
+
+  setTheme(S.theme);
+  renderInterval(); renderHint();
+}
+
+if(NATIVE){
+  window.chrome.webview.addEventListener('message',function(ev){
+    let m; try{ m=JSON.parse(ev.data); }catch(e){ return; }
+    switch(m.e){
+      case 'state':  applyState(m.conn,m.ip,m.bytes,m.seconds); break;
+      case 'config': applyConfig(m); break;
+      case 'busy':   S.busy=m.v||null; renderStatus(); break;
+      case 'log':    addLog(m.text,m.type); break;
+      case 'toast':  toast(m.title,m.msg,m.type); break;
+      case 'needCredentials':
+        switchView('account');
+        setTimeout(()=>{ shakeField(m.user?'#fieldUser':'#fieldPass'); },280);
+        break;
+    }
+  });
+}
+
 /* ---------------- timers ---------------- */
-setInterval(function(){
-  if(S.conn==='online'){
-    S.seconds++;
-    S.bytes += Math.floor(Math.random()*180000)+40000;
-    $('#mBytes').textContent=fmtBytes(S.bytes);
+if(NATIVE){
+  /* 原生模式：服务端每轮只返回累计值，这里按秒本地插值，读数才连续 */
+  setInterval(function(){
+    if(S.conn!=='online') return;
+    S.seconds=baseSeconds+Math.floor((Date.now()-baseAt)/1000);
     $('#mTime').textContent=fmtTime(S.seconds);
     $('#tmSub').textContent=S.ip+' · '+fmtTime(S.seconds);
+  },1000);
+}else{
+  setInterval(function(){
+    if(S.conn==='online'){
+      S.seconds++;
+      S.bytes += Math.floor(Math.random()*180000)+40000;
+      $('#mBytes').textContent=fmtBytes(S.bytes);
+      $('#mTime').textContent=fmtTime(S.seconds);
+      $('#tmSub').textContent=S.ip+' · '+fmtTime(S.seconds);
+    }
+  },1000);
+  (function loop(){
+    setTimeout(function(){
+      if(!S.busy && !S.minimized && S.conn!=='checking') check(false);
+      loop();
+    }, Math.max(5,S.interval)*1000);
+  })();
+}
+
+/* ---------------- titlebar drag (native) ---------------- */
+if(NATIVE){
+  const tb=document.querySelector('.titlebar');
+  if(tb){
+    tb.addEventListener('pointerdown',e=>{
+      if(e.target.closest('button')||e.target.closest('input')) return;
+      nativeSend({t:'win',a:'drag'});
+    });
   }
-},1000);
-(function loop(){
-  setTimeout(function(){
-    if(!S.busy && !S.minimized && S.conn!=='checking') check(false);
-    loop();
-  }, Math.max(5,S.interval)*1000);
-})();
+}
 
 /* ---------------- init ---------------- */
 $('#inUser').value=S.username;
 renderAll(); renderLog();
-addLog('应用启动，正在初始化…','info');
 setTimeout(()=>{ moveThemeThumb(); updateToastAnchor(); },120);
 window.addEventListener('resize',()=>{ moveThemeThumb(); updateToastAnchor(); });
-setTimeout(()=>{
-  addLog('网络状态检测已启动','info');
-  check(false);
-},900);
+
+if(NATIVE){
+  nativeSend({t:'ready'});
+  addLog('应用启动，正在初始化…','info');
+}else{
+  addLog('应用启动，正在初始化…','info');
+  setTimeout(()=>{
+    addLog('网络状态检测已启动','info');
+    check(false);
+  },900);
+}
 })();
 </script>
 </body>
