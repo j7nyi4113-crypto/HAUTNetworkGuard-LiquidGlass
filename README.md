@@ -23,8 +23,8 @@ A Liquid Glass UI redesign for [HAUTNetworkGuard](https://github.com/yellowpeach
 
 | 你的情况 | 下载 | 包里有什么 |
 | :--- | :--- | :--- |
-| **已经有原版程序** | [**界面包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.3.17/HAUTNetworkGuard-LiquidGlass-UI-v1.3.17.zip)<br>`20 KB` | 只有液态玻璃界面，解压双击 `index.html` |
-| **什么都没有** | [**完整包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.3.17/HAUTNetworkGuard-LiquidGlass-Full-v1.3.17.zip)<br>`37 MB` | 能用的程序 + 液态玻璃界面 + 启动脚本 |
+| **已经有原版程序** | [**界面包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.3.17/HAUTNetworkGuard-LiquidGlass-UI-v1.3.17.zip)<br>`20KB` | 只有液态玻璃界面，解压双击 `index.html` |
+| **什么都没有** | [**完整包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.3.17/HAUTNetworkGuard-LiquidGlass-Full-v1.3.17.zip)<br>`37MB` | 能用的程序 + 液态玻璃界面 + 启动脚本 |
 
 > [!IMPORTANT]
 > 完整包里有**两个东西**，别混淆：
