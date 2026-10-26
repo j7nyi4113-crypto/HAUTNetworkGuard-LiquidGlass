@@ -11,7 +11,7 @@ A Liquid Glass UI redesign prototype for [HAUTNetworkGuard](https://github.com/y
 ![Build](https://img.shields.io/badge/build-none-brightgreen)
 ![Deps](https://img.shields.io/badge/dependencies-0-lightgrey)
 
-**[🔗 在线演示](https://j7nyi4113-crypto.github.io/HAUTNetworkGuard-LiquidGlass/)** · **[原项目](https://github.com/yellowpeachxgp/HAUTNetworkGuard)**
+**[🔗 在线演示](https://j7nyi4113-crypto.github.io/HAUTNetworkGuard-LiquidGlass/)** · **[⬇️ 下载 v1.0.0](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/latest)** · **[原项目](https://github.com/yellowpeachxgp/HAUTNetworkGuard)**
 
 </div>
 
@@ -195,6 +195,14 @@ Windows 端基于 C++ 与 Qt 6 Widgets 实现，功能完整、长期维护。
 ---
 
 ## 运行
+
+### 方式一：下载压缩包（最简单）
+
+到 **[Releases](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/latest)** 下载
+`HAUTNetworkGuard-LiquidGlass-v1.0.0.zip`，解压后**双击 `index.html`** 即可。
+无需安装、无需联网、无需任何依赖。
+
+### 方式二：克隆仓库
 
 没有任何构建步骤，也不需要装依赖：
 
