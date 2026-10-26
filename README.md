@@ -4,18 +4,55 @@
 
 **河南工业大学校园网自动登录工具 —— 液态玻璃界面重设计**
 
-A Liquid Glass UI redesign prototype for [HAUTNetworkGuard](https://github.com/yellowpeachxgp/HAUTNetworkGuard).
+A Liquid Glass UI redesign for [HAUTNetworkGuard](https://github.com/yellowpeachxgp/HAUTNetworkGuard).
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Type](https://img.shields.io/badge/type-UI%20prototype-8b5cf6)
 ![Build](https://img.shields.io/badge/build-none-brightgreen)
 ![Deps](https://img.shields.io/badge/dependencies-0-lightgrey)
 
-**[🔗 在线演示](https://j7nyi4113-crypto.github.io/HAUTNetworkGuard-LiquidGlass/)** · **[⬇️ 下载 v1.0.0](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/latest)** · **[原项目](https://github.com/yellowpeachxgp/HAUTNetworkGuard)**
+**[🔗 在线演示](https://j7nyi4113-crypto.github.io/HAUTNetworkGuard-LiquidGlass/)** · **[⬇️ 所有版本](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases)** · **[原项目](https://github.com/yellowpeachxgp/HAUTNetworkGuard)**
 
 </div>
 
 ![界面总览](preview/overview.webp)
+
+---
+
+## 下载：先看你在哪种情况
+
+| 你的情况 | 下载哪个 | 大小 | 包里有什么 |
+| :--- | :--- | :--- | :--- |
+| **已经有原版程序** | [**界面包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.3.17/HAUTNetworkGuard-LiquidGlass-UI-v1.3.17.zip) | 20 KB | 只有液态玻璃界面，解压双击 `index.html` |
+| **什么都没有** | [**完整包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.3.17/HAUTNetworkGuard-LiquidGlass-Full-v1.3.17.zip) | 37 MB | 能用的程序 + 液态玻璃界面 + 启动脚本 |
+
+> [!IMPORTANT]
+> 完整包里有**两个东西**，别混淆：
+>
+> - `HAUTNetworkGuard\HAUTNetworkGuard.exe` —— 原版程序，**能真正登录校园网**，用的是原版界面
+> - `LiquidGlass\` + `Launch-LiquidGlass.bat` —— **新的液态玻璃界面**，目前是独立原型
+>
+> 想联网，用前者；想看新界面，用后者。
+
+### 完整包里怎么用
+
+解压后你会看到：
+
+```
+HAUTNetworkGuard-LiquidGlass-Full-v1.3.17\
+├── HAUTNetworkGuard\        原版程序 v1.3.17（Qt6 运行库已打包，离线可跑）
+├── LiquidGlass\             液态玻璃界面
+├── Launch-LiquidGlass.bat   以独立窗口打开界面，看起来像桌面程序
+└── 使用说明.txt
+```
+
+- **要真正登录校园网** → 运行 `HAUTNetworkGuard\HAUTNetworkGuard.exe`
+- **要看新版界面** → 双击 `Launch-LiquidGlass.bat`
+
+启动脚本会自动找 Edge 或 Chrome，用 `--app` 模式开一个没有地址栏的独立窗口；
+两个浏览器都没有时，退回默认浏览器打开。
+
+> 如果程序报缺少 VC++ 运行库，双击 `HAUTNetworkGuard\vc_redist.x64.exe` 装一次即可。
 
 ---
 
@@ -26,28 +63,29 @@ A Liquid Glass UI redesign prototype for [HAUTNetworkGuard](https://github.com/y
 原项目是一个成熟的跨平台校园网自动登录工具，支持 macOS、Windows、OpenWrt 与通用 Linux 四个平台，
 Windows 端基于 C++ 与 Qt 6 Widgets 实现，功能完整、长期维护。
 
-本项目**只重做界面层**，不涉及任何登录协议、网络逻辑或凭据处理：
-
-- 输出单文件 HTML 高保真原型，用于验证新版视觉方案
-- 功能、状态机与交互流程对齐原版 Windows 客户端
-- 可作为后续落地为 Qt QSS / QML 的设计基准
-
-> [!IMPORTANT]
-> 本仓库**不包含可执行程序**，也无法实际登录校园网。
-> 需要能用的客户端，请前往 [原项目](https://github.com/yellowpeachxgp/HAUTNetworkGuard) 下载。
+本项目**只重做界面层**，不涉及任何登录协议、网络逻辑或凭据处理。
 
 ### 与原项目的关系
 
-|                | 原项目 HAUTNetworkGuard | 本项目 |
-| -------------- | ----------------------- | ------ |
-| 定位           | 可直接使用的客户端      | 界面设计原型 |
-| 平台           | macOS / Windows / OpenWrt / Linux | 浏览器 |
-| 技术栈         | Swift / C++ Qt 6 / Lua  | 单文件 HTML + CSS + 原生 JS |
-| 校园网协议     | SRUN3K                  | 不包含协议实现 |
-| 凭据存储       | Keychain / DPAPI / UCI  | 不涉及 |
-| 许可           | MIT                     | MIT（继承） |
+| | 原项目 HAUTNetworkGuard | 本项目 |
+| :--- | :--- | :--- |
+| 定位 | 可直接使用的客户端 | 界面设计原型 |
+| 平台 | macOS / Windows / OpenWrt / Linux | 浏览器 |
+| 技术栈 | Swift / C++ Qt 6 / Lua | 单文件 HTML + CSS + 原生 JS |
+| 校园网协议 | SRUN3K | 不包含协议实现 |
+| 凭据存储 | Keychain / DPAPI / UCI | 不涉及 |
+| 许可 | MIT | MIT（继承） |
 
 原项目作者 **YellowPeach** · QQ 群 `789860526`
+
+### 为什么界面还没做进 exe 里
+
+原版程序是编译好的 Qt 程序，界面写死在二进制里。要替换界面，需要拿到源码重新编译，
+并且用 Qt 重做整套玻璃效果——`backdrop-filter` 这类能力在 QWidget 里没有等价物，
+需要自绘或者用 QML + ShaderEffect 实现。
+
+所以目前的形态是：**界面原型先跑通视觉方案，再谈落地**。
+这个仓库交付的是第一步——一套可以直接看、可以直接点的高保真原型。
 
 ---
 
@@ -56,10 +94,10 @@ Windows 端基于 C++ 与 Qt 6 Widgets 实现，功能完整、长期维护。
 第一版原型做出来后问题很集中——**过于"AI 化"，且玻璃是假的**。第二版针对这两点重做。
 
 | 问题 | 具体表现 | 处理方式 |
-| ---- | -------- | -------- |
+| :--- | :--- | :--- |
 | 视觉噪音过多 | 窗口内叠了一层彩色极光光斑、高饱和彩虹壁纸、大色块发光圆球、彩色图标底、厚重渐变阴影 | 全部移除。改为中性冷底 + 三道低饱和色雾，全站单一强调色 `#0a84ff` |
 | 玻璃不透明 | 面板用 `rgba(255,255,255,.55)`，几乎看不到背景，只有模糊没有折射 | 填充降到 `0.11 ~ 0.20`，叠加三层结构（见下节） |
-| 没有磨砂质感 | 纯色半透明，缺少颗粒 | 加 `feTurbulence` 生成的细颗粒，`background-blend` 融入玻璃 |
+| 没有磨砂质感 | 纯色半透明，缺少颗粒 | 加 `feTurbulence` 生成的细颗粒，融入玻璃 |
 | 没有流动感 | 全静态 | 桌面色雾缓慢漂移 + 各玻璃面镜面高光扫过 |
 
 ---
@@ -192,17 +230,11 @@ Windows 端基于 C++ 与 Qt 6 Widgets 实现，功能完整、长期维护。
 └── README.md
 ```
 
+> 仓库里只有界面源码。完整包里的原版程序不在此仓库，见 [Releases](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases)。
+
 ---
 
-## 运行
-
-### 方式一：下载压缩包（最简单）
-
-到 **[Releases](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/latest)** 下载
-`HAUTNetworkGuard-LiquidGlass-v1.0.0.zip`，解压后**双击 `index.html`** 即可。
-无需安装、无需联网、无需任何依赖。
-
-### 方式二：克隆仓库
+## 本地运行
 
 没有任何构建步骤，也不需要装依赖：
 
@@ -211,7 +243,7 @@ git clone https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass.git
 cd HAUTNetworkGuard-LiquidGlass
 ```
 
-双击 `index.html`，或者：
+双击 `index.html`，或者起个本地服务：
 
 ```bash
 python -m http.server 8000
@@ -225,11 +257,12 @@ python -m http.server 8000
 
 ## 已知限制
 
-- **仅为视觉原型**：所有网络请求都是模拟的，不连接真实网关，也不存储任何凭据。
+- **界面原型不能登录**：所有网络请求都是模拟的，不连接真实网关，也不存储任何凭据。
 - **浏览器兼容性**：`backdrop-filter: url()` 目前仅 Chromium 系支持。Firefox / Safari
   会退化为纯亮边（不影响整体观感），其余部分正常。
 - **性能**：主玻璃面叠加了全尺寸 SVG 位移滤镜，低端设备上可能掉帧。
   代码里已针对 `prefers-reduced-motion` 关闭全部动画。
+- **界面尚未进入程序**：原版 exe 仍是原版界面，替换需要源码重建，见上文说明。
 
 ---
 
@@ -241,3 +274,4 @@ python -m http.server 8000
 ## 许可证
 
 [MIT](LICENSE) —— 继承自原项目。原始版权归 YellowPeach 所有。
+完整包内的 Qt6 运行库遵循 LGPL v3。
