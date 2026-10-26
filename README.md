@@ -22,10 +22,10 @@ Windows 桌面程序 · 单文件下载 · 无需安装运行时
 
 ## 下载
 
-| | 下载 | 说明 |
-| :--- | :--- | :--- |
-| **程序包** | [HAUTNetworkGuard-LiquidGlass-v1.4.0.zip](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.4.0/HAUTNetworkGuard-LiquidGlass-v1.4.0.zip)<br>`390 KB` | 解压后双击 `HAUTNetworkGuard.exe` 即可 |
-| **界面包** | [HAUTNetworkGuard-UI-v1.4.0.zip](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.4.0/HAUTNetworkGuard-UI-v1.4.0.zip)<br>`20 KB` | 只有 `index.html`，浏览器里打开看效果 |
+| 选择 | 说明 |
+| :--- | :--- |
+| [**程序包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.4.0/HAUTNetworkGuard-LiquidGlass-v1.4.0.zip) `390 KB` | 解压后双击 `HAUTNetworkGuard.exe` 即可 |
+| [**界面包**](https://github.com/j7nyi4113-crypto/HAUTNetworkGuard-LiquidGlass/releases/download/v1.4.0/HAUTNetworkGuard-UI-v1.4.0.zip) `20 KB` | 只有 `index.html`，浏览器里打开看效果 |
 
 程序包基于系统自带的 .NET Framework 4.8，不需要安装 .NET、Node 或 Python。
 唯一前置条件是 Microsoft Edge WebView2 Runtime —— Windows 11 和较新的 Windows 10 默认自带。
